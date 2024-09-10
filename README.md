@@ -1,5 +1,19 @@
 # **EV Routing Project**
 
+## **Table of Contents**
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+  - [Backend Setup](#backend-setup)
+  - [Frontend Setup](#frontend-setup)
+- [Usage](#usage)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+- [Additional Sections for Future](#additional-sections-for-future)
+
 ## **Overview**
 This project simulates the routing of electric vehicles (EVs) from one point to another, considering key factors like battery consumption, charging stations, and road networks. The frontend uses **Leaflet.js** for map visualization, and the backend is powered by **Python** (Flask or FastAPI) to handle routing algorithms, battery simulation, and more.
 
