@@ -93,12 +93,12 @@ ev-routing-project/
 
 ## **Roadmap**
 The project will be developed iteratively, with the following planned features:
-1. **Phase 1**: Basic point-to-point EV routing with straight-line navigation. *(Complete)*
-2. **Phase 2**: Battery consumption simulation based on distance traveled.
-3. **Phase 3**: Integration of charging stations and charging behavior.
-4. **Phase 4**: Use of real-world road networks via OpenStreetMap.
-5. **Phase 5**: Simulating multiple EVs and interactions with the charging grid.
-6. **Phase 6**: Adding probabilistic failure models for charging stations.
+1. **Phase 1**: Basic point-to-point EV routing with straight-line navigation. *(In Progress)*
+2. **Phase 2**: Battery consumption simulation based on distance traveled. *(Not started)*
+3. **Phase 3**: Integration of charging stations and charging behavior. *(Not started)*
+4. **Phase 4**: Use of real-world road networks via OpenStreetMap. *(Not started)*
+5. **Phase 5**: Simulating multiple EVs and interactions with the charging grid. *(Not started)*
+6. **Phase 6**: Adding probabilistic failure models for charging stations. *(Not started)*
 
 ## **Contributing**
 If you'd like to contribute to this project, feel free to submit issues or pull requests! We welcome ideas for new features, improvements to the routing algorithms, and code optimizations.
