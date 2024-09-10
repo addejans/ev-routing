@@ -1,1 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EV Routing</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>#map { height: 100vh; }</style>
+</head>
+<body>
+<div id="map"></div>
 
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    // Initialize the map and set the view to a specific location
+    var map = L.map('map').setView([42.3314, -83.0458], 13); // Adjust this to a default location
+ 
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add markers for the start and end points
+    var startMarker, endMarker;
+
+    map.on('click', function(e) {
+        if (!startMarker) {
+            startMarker = L.marker(e.latlng).addTo(map).bindPopup("Start Point").openPopup();
+        } else if (!endMarker) {
+            endMarker = L.marker(e.latlng).addTo(map).bindPopup("End Point").openPopup();
+            getRoute(startMarker.getLatLng(), endMarker.getLatLng());  // Call API to get route
+        }
+    });
+
+    function getRoute(start, end) {
+        // Send start and end points to the backend API (Flask or FastAPI)
+        fetch(`/route?start=${start.lat},${start.lng}&end=${end.lat},${end.lng}`)
+            .then(response => response.json())
+            .then(data => {
+                // Plot the route on the map (for now, it's just a straight line)
+                var latlngs = [start, end];
+                var polyline = L.polyline(latlngs, {color: 'blue'}).addTo(map);
+            });
+    }
+</script>
+</body>
+</html>
