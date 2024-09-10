@@ -2,6 +2,7 @@
 
 ## **Table of Contents**
 - [Overview](#overview)
+- [Demo](#demo)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
@@ -13,12 +14,15 @@
 - [Contributing](#contributing)
 - [License](#license)
 - [API Documentation](#api-documentation)
-- [Demo](#demo)
 
 ## **Overview**
 This project simulates the routing of electric vehicles (EVs) from one point to another, considering key factors like battery consumption, charging stations, and road networks. The frontend uses **Leaflet.js** for map visualization, and the backend is powered by **Python** (Flask or FastAPI) to handle routing algorithms, battery simulation, and more.
 
 The project is developed iteratively, starting with simple point-to-point navigation and expanding to include dynamic routing, charging station management, and real-time EV data.
+
+## **Demo**
+
+**Demo Link**: *(URL to go here)*
 
 ## **Features**
 1. **Basic EV Routing**: The initial version allows a user to select a starting point (Point A) and a destination (Point B) on a map, and visualize the route between them.
@@ -218,7 +222,3 @@ GET /charging-stations?route=37.7749,-122.4194,34.0522,-118.2437
   ]
 }
 ```
-
-## **Demo**
-
-**Demo Link**: *(URL to go here)*
