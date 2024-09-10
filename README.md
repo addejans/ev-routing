@@ -24,6 +24,10 @@ The project is developed iteratively, starting with simple point-to-point naviga
 
 **Demo Link**: *(URL to go here)*
 
+**Screenshots**:
+
+![image](https://github.com/user-attachments/assets/0e0bde2c-336c-49fb-8aa4-efb60f544019)
+
 ## **Features**
 1. **Basic EV Routing**: The initial version allows a user to select a starting point (Point A) and a destination (Point B) on a map, and visualize the route between them.
 2. **Battery Simulation**: The system calculates battery usage as the EV travels between points.
