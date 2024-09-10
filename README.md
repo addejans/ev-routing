@@ -1,4 +1,4 @@
-# **EV Routing Project**
+# **EV Routing**
 
 ## **Table of Contents**
 - [Overview](#overview)
@@ -43,7 +43,7 @@ The project is developed iteratively, starting with simple point-to-point naviga
   
 ## **Project Structure**
 ```
-ev-routing-project/
+ev-routing/
 │
 ├── backend/                # Python backend code
 │   ├── app.py              # Main backend server file
