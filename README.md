@@ -12,7 +12,8 @@
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
-- [Additional Sections for Future](#additional-sections-for-future)
+- [API Documentation](#api-documentation)
+- [Demo](#demo)
 
 ## **Overview**
 This project simulates the routing of electric vehicles (EVs) from one point to another, considering key factors like battery consumption, charging stations, and road networks. The frontend uses **Leaflet.js** for map visualization, and the backend is powered by **Python** (Flask or FastAPI) to handle routing algorithms, battery simulation, and more.
@@ -120,8 +121,104 @@ If you'd like to contribute to this project, feel free to submit issues or pull 
 ## **License**
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
+## **API Documentation**
+
+The backend provides several endpoints for interacting with the EV routing system. Below are the detailed descriptions of each endpoint:
+
+### **1. `/route`**
+
+- **Method**: `GET`
+- **Description**: Calculates a route from a starting point (A) to a destination (B). Currently, the route is a simple straight line, but future iterations will include road networks and optimized routing with charging stations.
+- **Endpoint**: `/route?start=<latitude,longitude>&end=<latitude,longitude>`
+  
+#### **Request Parameters**:
+- `start`: The starting point of the route, represented as `latitude,longitude`.
+- `end`: The destination point, represented as `latitude,longitude`.
+
+#### **Example Request**:
+```bash
+GET /route?start=37.7749,-122.4194&end=34.0522,-118.2437
+```
+
+#### **Response**:
+- **200 OK**: Returns the route details as a JSON object with the start and end points.
+  
+#### **Response Example**:
+```json
+{
+  "start": [37.7749, -122.4194],
+  "end": [34.0522, -118.2437],
+  "route": [[37.7749, -122.4194], [36.7783, -119.4179], [34.0522, -118.2437]]
+}
+```
+
 ---
 
-## **Additional Sections for Future**:
-- **API Documentation**: As your API grows, you can add detailed explanations of each endpoint, including `/route`, `/battery-status`, `/charging-stations`.
-- **Demo Link**: If you host a demo version of the app, add the URL here.
+### **2. `/battery-status`**
+
+- **Method**: `GET`
+- **Description**: Calculates the remaining battery level for the EV after traveling a specified distance. The battery consumption is based on a fixed rate of energy usage per mile.
+- **Endpoint**: `/battery-status?distance=<distance>`
+
+#### **Request Parameters**:
+- `distance`: The distance traveled by the EV in miles.
+
+#### **Example Request**:
+```bash
+GET /battery-status?distance=200
+```
+
+#### **Response**:
+- **200 OK**: Returns the remaining battery percentage after traveling the specified distance.
+  
+#### **Response Example**:
+```json
+{
+  "initial_battery": 100,
+  "distance_traveled": 200,
+  "battery_remaining": 60
+}
+```
+
+---
+
+### **3. `/charging-stations`**
+
+- **Method**: `GET`
+- **Description**: Provides a list of available charging stations along the route. The stations include details like location, type (fast/slow charger), and estimated charging time.
+- **Endpoint**: `/charging-stations?route=<start_latitude,start_longitude,end_latitude,end_longitude>`
+
+#### **Request Parameters**:
+- `route`: The start and end points of the trip, represented as `start_latitude,start_longitude,end_latitude,end_longitude`. The backend will calculate which charging stations fall along this route.
+
+#### **Example Request**:
+```bash
+GET /charging-stations?route=37.7749,-122.4194,34.0522,-118.2437
+```
+
+#### **Response**:
+- **200 OK**: Returns a list of charging stations available along the route.
+  
+#### **Response Example**:
+```json
+{
+  "charging_stations": [
+    {
+      "station_id": 1,
+      "location": [36.7783, -119.4179],
+      "type": "fast",
+      "estimated_charging_time": 30
+    },
+    {
+      "station_id": 2,
+      "location": [35.3733, -119.0187],
+      "type": "slow",
+      "estimated_charging_time": 120
+    }
+  ]
+}
+```
+
+## **Demo**
+
+**Demo Link**: *(URL to go here)*
