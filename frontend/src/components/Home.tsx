@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
+import MapNode from './MapNode';
+import MapNodeProps from './MapNode';
 
 const Home = () => {
+  const [startPoint, setStartPoint] = useState<MapNodeProps>({});
+  const [endPoint, setEndPoint] = useState<typeof MapNode>();
+  const [carPoint, setCarPoint] = useState<typeof MapNode>();
 
-    [startPoint, setStartPoint] = useState();
-    [endPoint, setStartPoint] = useState();
-    [carPoint, setCarPoint] = useState();
+  useEffect(() => {
+    setStartPoint();
+    setEndPoint();
+    setCarPoint();
+  }, [startPoint, endPoint, carPoint]);
 
-    return (
+  return (
     <>
-        <Map
-            startPoint={startPoint}
-            endPoint={endPoint}
-            carPoint={carPoint}
-         />
+      <header>HELLO</header>
     </>
-    )
+  );
 };
 
 export default Home;
