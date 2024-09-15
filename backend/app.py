@@ -11,9 +11,9 @@ def get_route():
     car = request.args.get('car').split(',')
 
     # Convert the coordinates to float
-    start = [float(start[0]), float(start[1])]
-    end = [float(end[0]), float(end[1])]
-    car = [float(car[0]), float(car[1])]
+    start = [float(start[0]) + 10, float(start[1]) + 10]
+    end = [float(end[0]) + 10, float(end[1]) + 10]
+    car = [float(car[0]) + 10, float(car[1]) + 10]
 
     # Simple route information including car location
     route = {
