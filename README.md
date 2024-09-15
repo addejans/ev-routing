@@ -1,3 +1,7 @@
+Here’s an updated version of the README to reflect the latest API structure and changes:
+
+---
+
 # **EV Routing**
 
 ## **Table of Contents**
@@ -16,9 +20,9 @@
 - [API Documentation](#api-documentation)
 
 ## **Overview**
-This project simulates the routing of electric vehicles (EVs) from one point to another, considering key factors like battery consumption, charging stations, and road networks. The frontend uses **Leaflet.js** for map visualization, and the backend is powered by **Python** (Flask or FastAPI) to handle routing algorithms, battery simulation, and more.
+This project simulates the routing of electric vehicles (EVs) from one point to another, considering key factors like battery consumption, charging stations, and road networks. The frontend uses **Leaflet.js** for map visualization, and the backend is powered by **Python** (Flask) to handle routing algorithms, battery simulation, charging station management, and more.
 
-The project is developed iteratively, starting with simple point-to-point navigation and expanding to include dynamic routing, charging station management, and real-time EV data.
+The project is being developed iteratively, starting with simple point-to-point navigation and expanding to include dynamic routing, charging station management, and real-time EV data.
 
 ## **Demo**
 
@@ -26,14 +30,14 @@ The project is developed iteratively, starting with simple point-to-point naviga
 
 **Screenshots**:
 
-![image](https://github.com/user-attachments/assets/0e0bde2c-336c-49fb-8aa4-efb60f544019)
+*(Insert demo screenshots here)*
 
 ## **Features**
-1. **Basic EV Routing**: The initial version allows a user to select a starting point (Point A) and a destination (Point B) on a map, and visualize the route between them.
-2. **Battery Simulation**: The system calculates battery usage as the EV travels between points.
-3. **Charging Stations**: Routing algorithms include charging stations, allowing the EV to recharge during long trips.
-4. **Dynamic Mapping**: Integration with real-world road networks using the Leaflet.js and OpenStreetMap API.
-5. **Multiple EV Simulation (Planned)**: Future versions will simulate multiple EVs sharing the same grid, interacting with charging stations in real time.
+1. **EV Routing with Battery Simulation**: The backend calculates a route between two points, simulating battery consumption and incorporating charging stations when needed.
+2. **Charging Station Management**: The system selects charging stations along the route when the battery is insufficient to complete the journey.
+3. **Charging Time Calculation**: Charging time at each stop is calculated based on the charging station type (fast/regular) and the remaining battery level.
+4. **Real-time Route Updates**: The route dynamically updates with charging stops and battery level changes.
+5. **Dynamic Mapping**: Frontend uses **Leaflet.js** to provide a visual route map.
 
 ## **Tech Stack**
 - **Frontend**: 
@@ -41,40 +45,38 @@ The project is developed iteratively, starting with simple point-to-point naviga
   - HTML, CSS, JavaScript.
 - **Backend**: 
   - [Python](https://www.python.org/) for server-side logic.
-  - [Flask](https://flask.palletsprojects.com/) or [FastAPI](https://fastapi.tiangolo.com/) to handle API requests.
-- **Mapping API**: 
-  - [OpenStreetMap](https://www.openstreetmap.org/) for real-world road networks.
+  - [Flask](https://flask.palletsprojects.com/) for handling API requests.
   
 ## **Project Structure**
 ```
 ev-routing/
 │
-├── backend/                # Python backend code
-│   ├── app.py              # Main backend server file
-│   ├── routes.py           # API routes for routing logic
-│   ├── battery.py          # Battery consumption and energy logic
-│   ├── charging.py         # Charging station management
-│   ├── requirements.txt    # Backend dependencies
+├── /app/                   # Python backend application
+│   ├── __init__.py          # Initializes Flask app and imports routes
+│   ├── api.py               # Defines the HTTP API endpoints
+│   ├── /services            # Contains business logic for route planning
+│   │   └── route_service.py  # Logic for battery management and routing
+│   ├── /models              # Data models
+│   │   └── route.py          # Charging station data
+│   ├── /utils               # Utility functions
+│   │   └── math_utils.py     # Distance calculations and battery usage
+│   └── requirements.txt     # Backend dependencies
 │
-├── frontend/               # Frontend code (Leaflet.js, HTML, CSS)
-│   ├── index.html          # Main UI with Leaflet.js
-│   ├── map.js              # JS logic for Leaflet maps and API calls
-│   └── styles.css          # Styling for the UI
+├── frontend/                # Frontend code (Leaflet.js, HTML, CSS)
+│   ├── index.html           # Main UI with Leaflet.js
+│   ├── map.js               # JavaScript logic for frontend
+│   └── styles.css           # Frontend styling
 │
-├── tests/                  # Tests for both frontend and backend
-│   ├── backend/            # Backend-specific tests
-│   ├── frontend/           # Frontend-specific tests (e.g., JS unit tests)
-│
-└── README.md               # Project documentation
+└── README.md                # Project documentation
 ```
 
 ## **Installation**
 
 ### **Backend Setup**
-1. Clone the repository and navigate to the `backend` directory.
+1. Clone the repository and navigate to the `app` directory.
    ```bash
    git clone <repo-url>
-   cd ev-routing-project/backend
+   cd ev-routing/app
    ```
 
 2. Create a virtual environment and install dependencies.
@@ -84,9 +86,9 @@ ev-routing/
    pip install -r requirements.txt
    ```
 
-3. Run the Flask server (or FastAPI).
+3. Run the Flask server.
    ```bash
-   python app.py  # For Flask
+   python app.py
    ```
 
 4. The backend will run on `http://127.0.0.1:5000`.
@@ -107,12 +109,12 @@ ev-routing/
 
 ## **Usage**
 1. Open the frontend (browser) and select **Point A** and **Point B** by clicking on the map.
-2. The backend will calculate a simple route between the two points.
+2. The backend will calculate a route between the two points, including charging stops if necessary.
 3. The EV will move between the points and simulate battery consumption.
 4. As new features are added, you will be able to:
    - Include charging stations in the route.
    - View battery levels over time.
-   - Simulate multiple EVs using the same charging grid.
+   - Simulate charging times at charging stations.
 
 ## **Roadmap**
 The project will be developed iteratively, with the following planned features:
@@ -132,98 +134,57 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## **API Documentation**
 
-The backend provides several endpoints for interacting with the EV routing system. Below are the detailed descriptions of each endpoint:
+The backend provides several endpoints for interacting with the EV routing system:
 
 ### **1. `/route`**
 
 - **Method**: `GET`
-- **Description**: Calculates a route from a starting point (A) to a destination (B). Currently, the route is a simple straight line, but future iterations will include road networks and optimized routing with charging stations.
-- **Endpoint**: `/route?start=<latitude,longitude>&end=<latitude,longitude>`
+- **Description**: Calculates a route from a starting point to a destination, incorporating charging stations if necessary.
+- **Endpoint**: `/route?start=<latitude,longitude>&end=<latitude,longitude>&battery_range=<battery_range>`
   
 #### **Request Parameters**:
 - `start`: The starting point of the route, represented as `latitude,longitude`.
 - `end`: The destination point, represented as `latitude,longitude`.
+- `battery_range`: Optional parameter, representing the EV's battery range in miles (default: 100 miles).
 
 #### **Example Request**:
 ```bash
-GET /route?start=37.7749,-122.4194&end=34.0522,-118.2437
+GET /route?start=37.7749,-122.4194&end=34.0522,-118.2437&battery_range=100
 ```
 
 #### **Response**:
-- **200 OK**: Returns the route details as a JSON object with the start and end points.
-  
+- **200 OK**: Returns the route details, including any charging stops.
+
 #### **Response Example**:
 ```json
 {
   "start": [37.7749, -122.4194],
   "end": [34.0522, -118.2437],
-  "route": [[37.7749, -122.4194], [36.7783, -119.4179], [34.0522, -118.2437]]
-}
-```
-
----
-
-### **2. `/battery-status`**
-
-- **Method**: `GET`
-- **Description**: Calculates the remaining battery level for the EV after traveling a specified distance. The battery consumption is based on a fixed rate of energy usage per mile.
-- **Endpoint**: `/battery-status?distance=<distance>`
-
-#### **Request Parameters**:
-- `distance`: The distance traveled by the EV in miles.
-
-#### **Example Request**:
-```bash
-GET /battery-status?distance=200
-```
-
-#### **Response**:
-- **200 OK**: Returns the remaining battery percentage after traveling the specified distance.
-  
-#### **Response Example**:
-```json
-{
-  "initial_battery": 100,
-  "distance_traveled": 200,
-  "battery_remaining": 60
-}
-```
-
----
-
-### **3. `/charging-stations`**
-
-- **Method**: `GET`
-- **Description**: Provides a list of available charging stations along the route. The stations include details like location, type (fast/slow charger), and estimated charging time.
-- **Endpoint**: `/charging-stations?route=<start_latitude,start_longitude,end_latitude,end_longitude>`
-
-#### **Request Parameters**:
-- `route`: The start and end points of the trip, represented as `start_latitude,start_longitude,end_latitude,end_longitude`. The backend will calculate which charging stations fall along this route.
-
-#### **Example Request**:
-```bash
-GET /charging-stations?route=37.7749,-122.4194,34.0522,-118.2437
-```
-
-#### **Response**:
-- **200 OK**: Returns a list of charging stations available along the route.
-  
-#### **Response Example**:
-```json
-{
-  "charging_stations": [
+  "route": [
     {
-      "station_id": 1,
-      "location": [36.7783, -119.4179],
-      "type": "fast",
-      "estimated_charging_time": 30
+      "location": [37.7749, -122.4194],
+      "action": "Drive",
+      "distance_to_next": 100.0,
+      "speed": 60,
+      "travel_time_hours": 1.6667
     },
     {
-      "station_id": 2,
-      "location": [35.3733, -119.0187],
-      "type": "slow",
-      "estimated_charging_time": 120
+      "location": [36.16, -115.15],
+      "action": "Charge",
+      "type": "Regular Charger",
+      "distance_to_next": 50.0,
+      "charging_time_hours": 1.0
+    },
+    {
+      "location": [34.0522, -118.2437],
+      "action": "Drive",
+      "distance_to_next": 150.0,
+      "speed": 60,
+      "travel_time_hours": 2.5
     }
   ]
 }
 ```
+
+---
+
