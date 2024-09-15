@@ -159,4 +159,90 @@ cython_debug/
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+
+
+# Node.js dependencies (for your frontend React project)
+frontend/node_modules
+frontend/.pnp
+frontend/.pnp.js
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# IntelliJ IDEA specific files and directories (project-wide and in frontend)
+.idea/
+*.iml
+*.iws
+out/
+
+# TypeScript
+frontend/*.tsbuildinfo
+
+# Build directories
+frontend/build
+frontend/dist
+
+# Environment variables
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Coverage reports
+frontend/coverage
+frontend/*.lcov
+
+# Lock files
+frontend/package-lock.json
+frontend/yarn.lock
+
+# Optional npm cache directory
+frontend/.npm
+
+# IDE-specific metadata
+.DS_Store  # macOS metadata files
+Thumbs.db  # Windows metadata files
+
+# Temporary files
+frontend/.tmp
+frontend/.sass-cache/
+frontend/.cache/
+.vscode/
+
+# Production build output
+frontend/build
+
+# Debug or test logs
+frontend/*.log
+frontend/*.pid
+frontend/*.seed
+frontend/*.pid.lock
+
+# Test reports
+frontend/coverage
+frontend/junit.xml
+
+# Lint
+frontend/.eslintcache
+
+# React Native specific (if applicable)
+frontend/.expo/
+
+# Storybook files
+frontend/.storybook/
+
+# Parcel-bundler cache
+frontend/.cache
+
+# MacOS specific
+frontend/.DS_Store
+
+# Windows specific
+frontend/Thumbs.db
+
+# EditorConfig
+frontend/.editorconfig
+
