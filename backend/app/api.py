@@ -19,6 +19,7 @@ def get_route():
 
     # Plan route using the route_service logic
     planned_route = plan_route_with_charging(start, end, battery_range)
+    print("BACKEND: Successfully retrieved route.")
 
     # Return the start, end, and waypoints with charging stops if needed
     return jsonify({"start": start, "end": end, "route": planned_route})
