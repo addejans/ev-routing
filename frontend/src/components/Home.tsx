@@ -1,35 +1,53 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import type { MapNodeProps } from './MapNode';
-import MapNode from './MapNode'
+import { mapNode } from '../types/mapNode';
+import MapNode from './MapNode';
+import RoutePlanner from './RoutePlanner';
 
 const Home = () => {
-  const [startPoint, setStartPoint] = useState<MapNodeProps>({
-    latitude: 0,
-    longitude: 0,
+  const [startPoint, setStartPoint] = useState<mapNode>({
+    latitude: 34.05, // Los Angeles
+    longitude: -118.25, // San Francisco
   });
-  const [endPoint, setEndPoint] = useState<MapNodeProps>({
-    latitude: 0,
-    longitude: 0,
+  const [endPoint, setEndPoint] = useState<mapNode>({
+    latitude: 37.77,
+    longitude: -122.41,
   });
-  const [carPoint, setCarPoint] = useState<MapNodeProps>({
-    latitude: 0,
-    longitude: 0,
-  });
+  const [batteryRange, setBatteryRange] = useState(100);
 
   useEffect(() => {
     setStartPoint(startPoint);
     setEndPoint(endPoint);
-    setCarPoint(carPoint);
-  }, [startPoint, endPoint, carPoint]);
+  }, [startPoint, endPoint]);
 
   return (
     <>
       <header>
         <h1>This is a map placeholder.</h1>
-        <p>Start Location: <MapNode latitude={startPoint.latitude} longitude={startPoint.longitude}/></p>
-        <p>End Location: <MapNode latitude={endPoint.latitude} longitude={endPoint.longitude}/></p>
-        <p>Car Location: <MapNode latitude={carPoint.latitude} longitude={carPoint.longitude}/></p>
+        <p>
+          Start Location:{' '}
+          <MapNode
+            latitude={startPoint.latitude}
+            longitude={startPoint.longitude}
+          />
+        </p>
+        <p>
+          End Location:{' '}
+          <MapNode
+            latitude={endPoint.latitude}
+            longitude={endPoint.longitude}
+          />
+        </p>
+        <p>
+          <RoutePlanner
+            start={startPoint}
+            end={endPoint}
+            batteryRange={batteryRange}
+            setStart={setStartPoint}
+            setEnd={setEndPoint}
+            setBatteryRange={setBatteryRange}
+          />
+        </p>
       </header>
     </>
   );

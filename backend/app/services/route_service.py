@@ -105,5 +105,4 @@ def plan_route_with_charging(start, end, battery_range, speed=60):
                 "travel_time_hours": travel_time_hours,  # Time taken to complete this leg
             }
         )
-
     return route
